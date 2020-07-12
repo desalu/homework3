@@ -45,7 +45,7 @@ $(document).ready(function () {
   function writePassword() {
 
     if (isNaN(document.getElementById("nbrOfChar").value)) {
-      alert("The input you insert for password length is invalid. Please make to to enter valid numbers.");
+      alert("Invalid. Please enter a number betweeen 8 and 128.");
     } else if (document.getElementById("nbrOfChar").value < 8 || document.getElementById("nbrOfChar").value > 128) {
       alert("Your number outside parameter range. Please enter a number that is within the range.");
     } else if (symCheck.checked == false && numberCheck.checked == false && upperCheck.checked == false && lowerCheck.checked == false) {
