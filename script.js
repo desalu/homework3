@@ -1,60 +1,74 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
+  //variables list
   var generateBtn = document.querySelector("#generate");
   var copyBtn = document.querySelector("#copyButton");
   var pwText = document.querySelector("#passwordText");
-  var pwLength = document.getElementById("nbrOfChar").value;
+  var genModal = document.querySelector("#generateModal");
   var values = "";
   var password = "";
-  
+  var symCheck = document.getElementById('symbolCheck');
+  var numberCheck = document.getElementById('nbrCheck');
+  var upperCheck = document.getElementById('upperCase');
+  var lowerCheck = document.getElementById('lowerCase');
+
+  //A function that generate passwords for users
   function generatePassword() {
-    
-    if(document.getElementById('symbolCheck').checked) {
+
+    if (symCheck.checked) {
       values += "@%+\/!#$^?:,'(){}[]~-_.";
-    }
-  
-    if(document.getElementById('nbrCheck').checked) {
+    };
+
+    if (numberCheck.checked) {
       values += "0123456789";
-    }
-  
-    if(document.getElementById('upperCase').checked) {
+    };
+
+    if (upperCheck.checked) {
       values += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    }
-  
-    if(document.getElementById('lowerCase').checked) {
+    };
+
+    if (lowerCheck.checked) {
       values += "abcdefghijklmnopqrstuvwxyz";
-    }
-  
-    for (var i = 0; i < pwLength; i++) {
-      password += values.charAt(Math.floor(Math.random()*values.length));
-    }
- 
+    };
+
+    for (var i = 0; i < document.getElementById("nbrOfChar").value; i++) {
+      password += values.charAt(Math.floor(Math.random() * values.length));
+      console.log(password);
+
+    };
+
     return password;
-    
-  }
-  
-  function writePassword() {
-    
-    if (isNaN(document.getElementById("nbrOfChar").value)) {
-      alert("The input you insert for password length is invalid. Please make to to enter valid numbers.");
-      
-    }
-    else {
-    var password = generatePassword();
-    console.log(password);
-    $("#test").text(password);
-    $("#passwordText").val(password);
-    }
-    
+
   }
 
-  copyBtn.addEventListener("click", function () {  
+  //A function that verify inputs, execute calculating function, and outputs if inputs are valid
+  function writePassword() {
+
+    if (isNaN(document.getElementById("nbrOfChar").value)) {
+      alert("The input you insert for password length is invalid. Please make to to enter valid numbers.");
+    } else if (document.getElementById("nbrOfChar").value < 8 || document.getElementById("nbrOfChar").value > 128) {
+      alert("Your number outside parameter range. Please enter a number that is within the range.");
+    } else if (symCheck.checked == false && numberCheck.checked == false && upperCheck.checked == false && lowerCheck.checked == false) {
+      alert("None of checkbox are checked. Please check at lease one of them or close the box");
+
+    } else {
+      var password = generatePassword();
+      console.log(password);
+      console.log(document.getElementById('symbolCheck').checked);
+      $("#passwordText").val(password);
+      copyBtn.disabled = false;
+      $(genModal).modal('hide');
+    }
+  }
+
+  //A listener to start the program
+  copyBtn.addEventListener("click", function () {
     pwText.select();
-    pwText.setSelectionRange(0,99999);
+    pwText.setSelectionRange(0, 99999);
     document.execCommand("copy");
     alert("Password copied.");
   });
 
-  generateBtn.addEventListener("click", writePassword);
-  
+  generateBtn.addEventListener("click", writePassword)
+
 });
