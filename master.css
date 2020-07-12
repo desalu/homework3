@@ -1,0 +1,18 @@
+.bg-color {
+  background-color: #000;
+  
+  background-image: url(./markus-spiske-iar-afB0QQw-unsplash.jpg);
+  
+  background-size: cover;
+}
+
+.card {
+  width: 300px;
+  
+}
+
+@media(min-width: 768px) {
+  .card {
+    width: 688px;
+  }
+}
