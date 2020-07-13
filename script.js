@@ -49,7 +49,7 @@ $(document).ready(function () {
     } else if (document.getElementById("nbrOfChar").value < 8 || document.getElementById("nbrOfChar").value > 128) {
       alert("Your number outside parameter range. Please enter a number that is within the range.");
     } else if (symCheck.checked == false && numberCheck.checked == false && upperCheck.checked == false && lowerCheck.checked == false) {
-      alert("None of checkbox are checked. Please check at lease one of them or close the box");
+      alert("None of checkbox are checked. Please check at least one of them or close the box");
 
     } else {
       var password = generatePassword();
